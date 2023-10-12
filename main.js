@@ -128,13 +128,15 @@ function syncShapes() {
 // syncronise the shapes while resizing (optional function)
 function syncShapesWithResing(){
     ctx.clearRect(0, 0, canvas.width, canvas.height);
+    let rate =  windowWidth!= canvas.width? windowWidth/canvas.width : windowHeight/canvas.height
+
     for (const rect of rectangles.shapesList) {
         ctx.save();
         ctx.fillStyle = rect.getShape.color;
-        const newX = (rect.getX * canvas.width) / windowWidth;
-        const newY = (rect.getY * canvas.height) / windowHeight;
-        const newWidth = (rect.getWidth * canvas.width) / windowWidth;
-        const newHeight = (rect.getHeight * canvas.height) / windowHeight;
+        const newX = rect.getX / rate;
+        const newY = rect.getY /rate;
+        const newWidth = rect.getWidth / rate;
+        const newHeight = rect.getHeight / rate;
         
         rect.setX = newX;
         rect.setY = newY;
